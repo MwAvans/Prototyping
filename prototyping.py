@@ -63,7 +63,7 @@ if upload_file is not None:
     from sklearn.pipeline import make_pipeline
 
 # Inladen van de dataset
-    df = salaries[salaries['job_title'] == "Data Scientist]
+    df = salaries[salaries['job_title'] == "Data Scientist"]
 
     # Selecteren van features en target variabele
     features = ['salary', 'salary_in_usd']
