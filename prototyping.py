@@ -55,3 +55,30 @@ if upload_file is not None:
     print("RMSE_test: {}".format(np.round(rmse_test,2)))
     print("MAE_test: {}".format(np.round(mae_test, 2)))
 
+    
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import r2_score
+    from sklearn.linear_model import LinearRegression
+    from sklearn.preprocessing import PolynomialFeatures
+    from sklearn.pipeline import make_pipeline
+
+# Inladen van de dataset
+    df = salaries
+
+    # Selecteren van features en target variabele
+    features = ['salary', 'salary_in_usd']
+    target = 'remote_ratio_50'
+
+    # Scheiden van train en test set
+    X_train, X_test, y_train, y_test = train_test_split(df[features], df[target], test_size=0.2, random_state=42)
+
+    # Opstellen en trainen van het model met feature engineering en hyperparameter tuning
+    model = make_pipeline(PolynomialFeatures(degree=2), LinearRegression())
+    model.fit(X_train, y_train)
+
+    # Voorspellen van de delivery_time op de test set
+    y_pred = model.predict(X_test)
+
+    # Evalueren van het model
+    r2 = r2_score(y_test, y_pred)
+    st.write("R2 score: ", r2)
