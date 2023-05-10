@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-
+import matplotlib.pyplot as plt
 st.title("Data scientists salaries")
 
 upload_file = st.file_uploader('Upload a file containing earthquake data')
