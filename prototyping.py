@@ -49,11 +49,11 @@ if upload_file is not None:
     mae_test = mean_absolute_error(y_test, y_test_pred)
 
     # Print the metrics
-    print("Model evaluation results:")
-    print('R_Squared:', r_squared)
-    print("RMSE_train: {}".format(np.round(rmse_train,2)))
-    print("RMSE_test: {}".format(np.round(rmse_test,2)))
-    print("MAE_test: {}".format(np.round(mae_test, 2)))
+    st.header('Header of Dataframe')("Model evaluation results:")
+    st.write('R_Squared:', r_squared)
+    st.write("RMSE_train: {}".format(np.round(rmse_train,2)))
+    st.write("RMSE_test: {}".format(np.round(rmse_test,2)))
+    st.write("MAE_test: {}".format(np.round(mae_test, 2)))
 
     
     from sklearn.model_selection import train_test_split
@@ -81,4 +81,5 @@ if upload_file is not None:
 
     # Evalueren van het model
     r2 = r2_score(y_test, y_pred)
+    st.header('The R2 score')
     st.write("R2 score: ", r2)
