@@ -14,7 +14,7 @@ if upload_file is not None:
 
     # Read the file to a dataframe using pandas
     salaries = pd.read_csv(upload_file)
-    salaries = salaries[salaries.salary<300000]
+    salaries = salaries[salaries.salary<500000]
     # Create a section for the dataframe statistics
     st.header('Statistics of Dataframe')
     st.write(salaries.describe())
@@ -63,7 +63,7 @@ if upload_file is not None:
     from sklearn.pipeline import make_pipeline
 
 # Inladen van de dataset
-    df = salaries
+    df = salaries[salaries['job_title'] == "Data Scientist]
 
     # Selecteren van features en target variabele
     features = ['salary', 'salary_in_usd']
