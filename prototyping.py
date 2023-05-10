@@ -64,7 +64,7 @@ if upload_file is not None:
 
 # Inladen van de dataset
     # Inladen van de dataset
-    df = sal_filter[sal_filter['job_title_Data Scientist'] == 1]
+    df = salaries[salaries['job_title_Data Scientist'] == 1]
 
     # Selecteren van features en target variabele
     features = ['salary_in_usd']
