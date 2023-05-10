@@ -49,7 +49,7 @@ if upload_file is not None:
     mae_test = mean_absolute_error(y_test, y_test_pred)
 
     # Print the metrics
-    st.header('Header of Dataframe')("Model evaluation results:")
+    st.header("Model evaluation results:")
     st.write('R_Squared:', r_squared)
     st.write("RMSE_train: {}".format(np.round(rmse_train,2)))
     st.write("RMSE_test: {}".format(np.round(rmse_test,2)))
