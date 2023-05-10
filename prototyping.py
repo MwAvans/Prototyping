@@ -14,7 +14,7 @@ if upload_file is not None:
 
     # Read the file to a dataframe using pandas
     salaries = pd.read_csv(upload_file)
-    salaries = salaries[salaries.salary<500000]
+    salaries = salaries[salaries.salary<300000]
     # Create a section for the dataframe statistics
     st.header('Statistics of Dataframe')
     st.write(salaries.describe())
