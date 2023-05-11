@@ -110,13 +110,13 @@ if upload_file is not None:
     from sklearn.utils import resample
 
     from sklearn.utils import resample
-
     highest = salaries.loc[(salaries['work_year_2022']==1)]
     lowest = salaries.loc[(salaries['work_year_2022']==0)]
 
+    SA_Resample = pd.concat([highest,lowest])
+    
     X = SA_Resample.loc[:, SA_Resample.columns != 'work_year_2022']
     y = SA_Resample['work_year_2022']
-
 
     # Create training and test sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .3, random_state=500, stratify=y)
