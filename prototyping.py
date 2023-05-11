@@ -38,11 +38,11 @@ if upload_file is not None:
     salaries = salaries[salaries.salary<salary_cap]
     # Create a section for the dataframe header
     st.header('Header of Dataframe')
-    st.write(salaries.head())
     from sklearn.linear_model import LinearRegression
     from sklearn.model_selection import train_test_split
     from sklearn.metrics import mean_squared_error
     from sklearn.metrics import mean_absolute_error
+
 
     X = salaries['salary'].values.reshape(-1,1)
     y = salaries['salary_in_usd'].values
@@ -82,8 +82,9 @@ if upload_file is not None:
     # Inladen van de dataset
     # Inladen van de dataset
     df = salaries[salaries['job_title_Data Scientist'] == 1]
-
-     # Selecteren van features en target variabele
+    
+    st.write("Linear regression tussen  Employee Residence US en Salary in USD") 
+    # Selecteren van features en target variabele
     features = ['employee_residence_US']
     target = 'salary_in_usd'
     # Scheiden van train en test set
