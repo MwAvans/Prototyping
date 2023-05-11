@@ -149,6 +149,7 @@ if upload_file is not None:
     plt.title("Decision tree voor work_year")
     plt.show()
     fig.savefig("decision_tree.png")
+    st.pyplot(fig)
 
     from sklearn.tree import plot_tree
     fig = plt.figure(figsize=(10,30))
@@ -160,4 +161,5 @@ if upload_file is not None:
     ConfusionMatrixDisplay.from_estimator(
         dt, X_test, y_test, cmap=plt.cm.Blues)
 
-    plt.show()
+    fig = plt.show()
+    st.pyplot(fig)
