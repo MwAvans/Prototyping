@@ -177,6 +177,7 @@ if upload_file is not None:
    
 
 #sidebar
+y='employee_residence_US'
 
 # Return your the columnnames used as input for your algorithm:
 salaries_dum_unlabeled = salaries.columns[0:194];
@@ -211,3 +212,4 @@ def code_gen(dic):
             print(key+'_var', '=',"st.sidebar.number_input(", "'",key,"'", ',',dic.get(key)[0],',', dic.get(key)[1], ')')
             
 code_gen(dic_builder(salaries_un))
+
