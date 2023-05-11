@@ -109,6 +109,8 @@ if upload_file is not None:
 
     from sklearn.utils import resample
 
+    from sklearn.utils import resample
+
     highest = salaries.loc[(salaries['work_year_2022']==1)]
     lowest = salaries.loc[(salaries['work_year_2022']==0)]
 
@@ -124,10 +126,11 @@ if upload_file is not None:
                                      random_state=233)  # reproducible results
     #Merge datasets
     SA_Resample = pd.concat([highest,lowest])
-    
+
     X = SA_Resample.loc[:, SA_Resample.columns != 'work_year_2022']
     y = SA_Resample['work_year_2022']
-    
+
+
     # Create training and test sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .3, random_state=500, stratify=y)
 
@@ -153,7 +156,6 @@ if upload_file is not None:
     print('Test set accuracy: {:.2f}'.format(acc_test)) 
     print('Test set precision: {:.2f}'.format(precision))
     print('Test set recall: {:.2f}'.format(recall))
-    
 
     fig = plt.figure(figsize=(10,30))
     plot_tree(dt, filled=True)
@@ -161,7 +163,9 @@ if upload_file is not None:
     plt.show()
     fig.savefig("decision_tree.png")
 
-    ConfusionMatrixDisplay.from_estimator(
-        dt, X_test, y_test, cmap=plt.cm.Blues)
-
+    from sklearn.tree import plot_tree
+    fig = plt.figure(figsize=(10,30))
+    plot_tree(dt, filled=True)
+    plt.title("Decision tree voor work_year")
     plt.show()
+    fig.savefig("decision_tree.png")
