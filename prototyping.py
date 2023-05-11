@@ -8,6 +8,7 @@ from sklearn.decomposition import PCA
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
+import os
 
 st.title("Data scientists salaries")
 
@@ -38,6 +39,7 @@ if upload_file is not None:
     from joblib import dump, load
 
     #Load your trained models and csv file
+    model = load(str(str(os.getcwd())+'/Decisiontree.good.joblib'))
     model = load(str(str('/Decisiontree.good.joblib'))) 
     df= salaries
 
