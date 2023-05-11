@@ -167,3 +167,47 @@ if upload_file is not None:
     fig = plt.show()
     
     st.pyplot(fig)
+
+    
+
+    
+    
+    
+    
+   
+
+#sidebar
+
+# Return your the columnnames used as input for your algorithm:
+salaries_dum_unlabeled = salaries.columns[0:28];
+salaries_un=salaries[attrition_dum_unlabeled];
+salaries_un=salaries.loc[:, salaries_un.columns != y]
+salaries_un=salaries.loc[:, salaries_un.columns]
+for i in salaries:
+    print(i,',')
+    
+    
+# use this function to build a dictionary of the X values their column names and their categorisch 
+def dic_builder(data):
+    dic={}
+    CAT=list(data.select_dtypes(include='object').columns)
+    for i in list(data.columns):
+        if i in CAT:
+            dic[str(i)] = i
+            dic[str(i)] = list(data[str(i)].unique())
+        else:
+            dic[str(i)] = [min(data[i]), max(salaries_un[i])]
+    return dic
+
+dic=dic_builder(salaries_un)
+
+# use this function to write the code that you can implement in you streamlit file. 
+#You can change the code for example into st.select_slider
+def code_gen(dic):
+    for key in dic:
+        if (type(dic.get(key)[0])==str)==True:
+            print(key+'_var', '=', "st.sidebar.select_slider(", "'",key,"'", ',', dic.get(key),')')
+        else:
+            print(key+'_var', '=',"st.sidebar.number_input(", "'",key,"'", ',',dic.get(key)[0],',', dic.get(key)[1], ')')
+            
+code_gen(dic_builder(salaries_un))
