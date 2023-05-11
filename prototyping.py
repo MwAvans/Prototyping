@@ -114,19 +114,6 @@ if upload_file is not None:
     highest = salaries.loc[(salaries['work_year_2022']==1)]
     lowest = salaries.loc[(salaries['work_year_2022']==0)]
 
-
-    highest = resample(highest, 
-                                     replace=True,    # sample with replacement
-                                     n_samples=200, # to match majority class
-                                     random_state=233)  # reproducible results                            
-
-    lowest = resample(lowest, 
-                                     replace=True,    # sample with replacement
-                                     n_samples= 200, # to match minorty class
-                                     random_state=233)  # reproducible results
-    #Merge datasets
-    SA_Resample = pd.concat([highest,lowest])
-
     X = SA_Resample.loc[:, SA_Resample.columns != 'work_year_2022']
     y = SA_Resample['work_year_2022']
 
