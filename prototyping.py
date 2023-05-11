@@ -39,7 +39,7 @@ if upload_file is not None:
     from joblib import dump, load
 
     #Load your trained models and csv file
-    model = load(str(str(os.getcwd())+'/Decisiontree.good.joblib'))
+    model = open(str(str(os.getcwd())+'/Decisiontree.good.joblib'))
     model = load(str(str('/Decisiontree.good.joblib'))) 
     df= salaries
 
