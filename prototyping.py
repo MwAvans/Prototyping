@@ -156,3 +156,8 @@ if upload_file is not None:
     plt.title("Decision tree voor work_year")
     plt.show()
     fig.savefig("decision_tree.png")
+    
+    ConfusionMatrixDisplay.from_estimator(
+        dt, X_test, y_test, cmap=plt.cm.Blues)
+
+    plt.show()
