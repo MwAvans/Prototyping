@@ -19,6 +19,8 @@ classifier_name = st.sidebar.selectbox(
     ('KNN', 'SVM', 'Random Forest')
 )
 
+salary_cap = st.sidebar.number_input( 'Salary in USD ' , 40000 , 500000)
+
 # Check to see if a file has been uploaded
 if upload_file is not None:
     # If it has then do the following:
@@ -31,7 +33,7 @@ if upload_file is not None:
     st.header('Statistics of Dataframe')
     st.write(salaries.describe())
 
-    salary_cap = st.sidebar.slider( ' Salary in USD ' , 10000 , 500000)
+    
     
     salaries = salaries[salaries.salary<salary_cap]
     # Create a section for the dataframe header
