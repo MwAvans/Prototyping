@@ -101,6 +101,38 @@ if upload_file is not None:
     
     import matplotlib.pyplot as plt
     from sklearn.metrics import ConfusionMatrixDisplay
+    # Import modelling packages
+    from sklearn.tree import DecisionTreeClassifier
+    from sklearn.metrics import accuracy_score
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import precision_score
+    from sklearn.metrics import recall_score
+
+    # Create training and test sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .3, random_state=500, stratify=y)
+
+    # Instantiate dt_entropy, set 'entropy' as the information criterion
+    dt = DecisionTreeClassifier(criterion='entropy',
+                                max_depth=11,
+                                min_samples_split=5,
+                                min_samples_leaf=5,
+                                max_features='sqrt',
+                                random_state=1)
+
+
+    # Fit dt_entropy to the training set
+    dt.fit(X_train, y_train)
+
+    # Predict test set labels
+    y_pred = dt.predict(X_test)
+
+    # Evaluate acc_test
+    acc_test = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred) #geeft aan hoe goed het model is in het voorspellen van de positieve klassen
+    recall = recall_score(y_test, y_pred) #geeft aan hoeveel procent van de positieve voorbeelden als positief zijn geklasseerd
+    print('Test set accuracy: {:.2f}'.format(acc_test)) 
+    print('Test set precision: {:.2f}'.format(precision))
+    print('Test set recall: {:.2f}'.format(recall))
 
     ConfusionMatrixDisplay.from_estimator(
         dt, X_test, y_test, cmap=plt.cm.Blues)
