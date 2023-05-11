@@ -98,3 +98,11 @@ if upload_file is not None:
     r2 = r2_score(y_test, y_pred)
     st.header('The R2 score')
     st.write("R2 score: ", r2)
+    
+    import matplotlib.pyplot as plt
+    from sklearn.metrics import ConfusionMatrixDisplay
+
+    ConfusionMatrixDisplay.from_estimator(
+        dt, X_test, y_test, cmap=plt.cm.Blues)
+
+    plt.show()
