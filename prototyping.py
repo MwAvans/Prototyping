@@ -23,13 +23,17 @@ classifier_name = st.sidebar.selectbox(
 if upload_file is not None:
     # If it has then do the following:
 
+    
     # Read the file to a dataframe using pandas
     salaries = pd.read_csv(upload_file)
-    salaries = salaries[salaries.salary<300000]
+    
     # Create a section for the dataframe statistics
     st.header('Statistics of Dataframe')
     st.write(salaries.describe())
 
+    salary_cap = st.sidebar.number_input( ' Salary in USD ' , 10000 , 500000)
+    
+    salaries = salaries[salaries.salary<salary_cap]
     # Create a section for the dataframe header
     st.header('Header of Dataframe')
     st.write(salaries.head())
@@ -94,47 +98,3 @@ if upload_file is not None:
     r2 = r2_score(y_test, y_pred)
     st.header('The R2 score')
     st.write("R2 score: ", r2)
-    
-
-    def get_classifier(clf_name, params):
-    clf = None
-    if clf_name == 'SVM':
-        clf = SVC(C=params['C'])
-    elif clf_name == 'KNN':
-        clf = KNeighborsClassifier(n_neighbors=params['K'])
-    else:
-        clf = clf = RandomForestClassifier(n_estimators=params['n_estimators'], 
-            max_depth=params['max_depth'], random_state=1234)
-    return clf
-
-    clf = get_classifier(classifier_name, params)
-    
-    _train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
-
-    clf.fit(X_train, y_train)
-    y_pred = clf.predict(X_test)
-
-    acc = accuracy_score(y_test, y_pred)
-
-    st.write(f'Classifier = {classifier_name}')
-    st.write(f'Accuracy =', acc)
-
-    #### PLOT DATASET ####
-    # Project the data onto the 2 primary principal components
-    pca = PCA(2)
-    X_projected = pca.fit_transform(X)
-
-    x1 = X_projected[:, 0]
-    x2 = X_projected[:, 1]
-
-    fig = plt.figure()
-    plt.scatter(x1, x2,
-            c=y, alpha=0.8,
-            cmap='viridis')
-
-    plt.xlabel('Principal Component 1')
-    plt.ylabel('Principal Component 2')
-    plt.colorbar()
-
-    #plt.show()
-    st.pyplot(fig)
