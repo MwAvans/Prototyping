@@ -31,7 +31,7 @@ if upload_file is not None:
     st.header('Statistics of Dataframe')
     st.write(salaries.describe())
 
-    salary_cap = st.sidebar.number_input( ' Salary in USD ' , 10000 , 500000)
+    salary_cap = st.sidebar.slider( ' Salary in USD ' , 10000 , 500000)
     
     salaries = salaries[salaries.salary<salary_cap]
     # Create a section for the dataframe header
