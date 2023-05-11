@@ -38,7 +38,7 @@ if upload_file is not None:
     from joblib import dump, load
 
     #Load your trained models and csv file
-    model = load(str(str('/Decisiontree.good.joblib'))
+    model = load(str(str('/Decisiontree.good.joblib'))) 
     df= salaries
 
     # Define your target values (y) and your features (df_un) often X
