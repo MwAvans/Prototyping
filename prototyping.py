@@ -83,9 +83,9 @@ if upload_file is not None:
     # Inladen van de dataset
     df = salaries[salaries['job_title_Data Scientist'] == 1]
 
-    # Selecteren van features en target variabele
-    features = ['salary_in_usd']
-    target = 'salary'
+     # Selecteren van features en target variabele
+    features = ['employee_residence_US']
+    target = 'salary_in_usd'
     # Scheiden van train en test set
     X_train, X_test, y_train, y_test = train_test_split(df[features], df[target], test_size=0.2, random_state=42)
 
