@@ -4,6 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+
 st.title("Data scientists salaries")
 
 upload_file = st.file_uploader('Upload a file containing earthquake data')
@@ -89,3 +94,47 @@ if upload_file is not None:
     r2 = r2_score(y_test, y_pred)
     st.header('The R2 score')
     st.write("R2 score: ", r2)
+    
+
+    def get_classifier(clf_name, params):
+    clf = None
+    if clf_name == 'SVM':
+        clf = SVC(C=params['C'])
+    elif clf_name == 'KNN':
+        clf = KNeighborsClassifier(n_neighbors=params['K'])
+    else:
+        clf = clf = RandomForestClassifier(n_estimators=params['n_estimators'], 
+            max_depth=params['max_depth'], random_state=1234)
+    return clf
+
+    clf = get_classifier(classifier_name, params)
+    
+    _train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1234)
+
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+
+    acc = accuracy_score(y_test, y_pred)
+
+    st.write(f'Classifier = {classifier_name}')
+    st.write(f'Accuracy =', acc)
+
+    #### PLOT DATASET ####
+    # Project the data onto the 2 primary principal components
+    pca = PCA(2)
+    X_projected = pca.fit_transform(X)
+
+    x1 = X_projected[:, 0]
+    x2 = X_projected[:, 1]
+
+    fig = plt.figure()
+    plt.scatter(x1, x2,
+            c=y, alpha=0.8,
+            cmap='viridis')
+
+    plt.xlabel('Principal Component 1')
+    plt.ylabel('Principal Component 2')
+    plt.colorbar()
+
+    #plt.show()
+    st.pyplot(fig)
