@@ -42,7 +42,7 @@ if upload_file is not None:
     df= salaries
 
     # Define your target values (y) and your features (df_un) often X
-    y='Attrition_Yes';
+    y='work_year_2021';
     df_dt=df.loc[:, df.columns != y]; # exclude the target value
     df_dt= df_dt.loc[:, df_dt.columns != 'work_year_2021']; #exclude the total energy column
 
@@ -58,14 +58,11 @@ if upload_file is not None:
     st.markdown(hide_default_format, unsafe_allow_html=True)
 
 
-# Create a dropdown box on your main paige
-page = st.sidebar.selectbox('Kies de pagina die je nodig hebt',
+    # Create a dropdown box on your main paige
+    page = st.sidebar.selectbox('Kies de pagina die je nodig hebt',
          ['Home',
             'Classificatie model',
             'Regressie model'])
-    
-    
-    
     column= ['work_year', 'job_title', 'remote_ratio',
            'salary_in_usd'];
     
