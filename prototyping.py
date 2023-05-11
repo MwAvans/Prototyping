@@ -179,7 +179,7 @@ if upload_file is not None:
 #sidebar
 
 # Return your the columnnames used as input for your algorithm:
-salaries_dum_unlabeled = salaries.columns;
+salaries_dum_unlabeled = salaries.columns[0:194];
 salaries_un=salaries[salaries_dum_unlabeled];
 salaries_un=salaries.loc[:, salaries_un.columns != y]
 salaries_un=salaries.loc[:, salaries_un.columns]
