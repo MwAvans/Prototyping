@@ -35,6 +35,83 @@ if upload_file is not None:
 
     
     
+    from joblib import dump, load
+
+    #Load your trained models and csv file
+    model = load(str(str('/Decisiontree.good.joblib'))
+    df= salaries
+
+    # Define your target values (y) and your features (df_un) often X
+    y='Attrition_Yes';
+    df_dt=df.loc[:, df.columns != y]; # exclude the target value
+    df_dt= df_dt.loc[:, df_dt.columns != 'work_year_2021']; #exclude the total energy column
+
+    #Proberen
+    st.set_page_config(page_title='voorspellen')
+
+    hide_default_format = """
+           <style>
+           #MainMenu {visibility: hidden; }
+           footer {visibility: hidden;}
+           </style>
+           """
+    st.markdown(hide_default_format, unsafe_allow_html=True)
+
+
+# Create a dropdown box on your main paige
+page = st.sidebar.selectbox('Kies de pagina die je nodig hebt',
+         ['Home',
+            'Classificatie model',
+            'Regressie model'])
+    
+    
+    
+    column= ['work_year', 'job_title', 'remote_ratio',
+           'salary_in_usd'];
+    
+    columnames_onehot = []
+    with open("train_colnames.txt", "r") as f:
+          for line in f:
+                columnames_onehot.append(str(line.strip()))
+
+    if st.sidebar.button('Predict'):
+        dic={}
+        for i in range(0,len(column)):
+            dic[str(column[i])] = var[i]
+        X_unseen = pd.DataFrame.from_dict([dic])
+        X_unseen = pd.get_dummies(X_unseen).reindex(columns=columnames_onehot, fill_value=0)
+        
+        prediction=model.predict(np.array(X_unseen))[0]
+        
+        pred_prob = model.predict_proba(X_unseen)
+        
+        if prediction == 0:
+            st.success(f"Er is een kans van {pred_prob[0][0] * 100}% dat deze medewerker bij de organisatie blijft ")
+        else:
+            st.error(
+                f"Er is een kans van {pred_prob[0][1] * 100}% dat deze medewerker de organisatie verlaat")
+
+    st.sidebar.text("")
+
+# Regression page
+elif page == 'Regressie model':
+    st.title('Can we predict the total average energy used through a household based on the average annual electric usage?')
+    average_annual_electric_use_mmbtu_var = st.number_input('Insert the average annual electric use in mmbtu ', 0.0, 594.99)
+
+    if st.button('Predict'):
+        prediction_lin= reg.predict(np.array(average_annual_electric_use_mmbtu_var).reshape(-1,1))
+        st.write('The prediction of average total energy use in mmbtu is between the {} '.format(
+            np.round(prediction_lin[0] - 26.76), 2), 'and the {}' .format(np.round(prediction_lin[0] + 26.76), 2))
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     salaries = salaries[salaries.salary<salary_cap]
     # Create a section for the dataframe header
     st.header('Header of Dataframe')
