@@ -161,5 +161,5 @@ if upload_file is not None:
     ConfusionMatrixDisplay.from_estimator(
         dt, X_test, y_test, cmap=plt.cm.Blues)
 
-    fig, x = plt.subplots()
+    
     st.pyplot(fig)
